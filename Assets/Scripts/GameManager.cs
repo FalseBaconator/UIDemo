@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private UIManager uiManager;
     private LevelManager levelManager;
-    public FirstPersonController_Sam player;
+    public FirstPersonController_Sam firstPersonSam;
     public enum GameState { MainMenu, GamePlay, Pause, Win, Lose }
 
     private GameState _gameState;
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
                     {
-                        player.UnPause();
+                        firstPersonSam.UnPause();
                     }
                     catch { }
                     Cursor.visible = false;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
                     {
-                        player.Pause();
+                        firstPersonSam.Pause();
                     }catch { }
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
                     {
-                        player.Pause();
+                        firstPersonSam.Pause();
                     }
                     catch { }
                     Cursor.visible = true;
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
                     {
-                        player.Pause();
+                        firstPersonSam.Pause();
                     }
                     catch { }
                     Cursor.visible = true;
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayer(FirstPersonController_Sam character)
     {
-        player = character;
+        firstPersonSam = character;
     }
 
     // Start is called before the first frame update
@@ -111,14 +111,14 @@ public class GameManager : MonoBehaviour
                 {
                     gameState = GameState.Pause;
                 }
-                if (Input.GetKeyDown(KeyCode.W))
+                /*if (Input.GetKeyDown(KeyCode.W))
                 {
                     gameState = GameState.Win;
                 }
                 if (Input.GetKeyDown(KeyCode.L))
                 {
                     gameState = GameState.Lose;
-                }
+                }*/
                 break;
             case GameState.Pause:
                 if (Input.GetKeyDown(KeyCode.Escape))
@@ -127,16 +127,16 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Win:
-                if (Input.GetKeyDown(KeyCode.Escape))
+                /*if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.GamePlay;
-                }
+                }*/
                 break;
             case GameState.Lose:
-                if (Input.GetKeyDown(KeyCode.Escape))
+                /*if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.GamePlay;
-                }
+                }*/
                 break;
         }
     }
@@ -152,5 +152,11 @@ public class GameManager : MonoBehaviour
         gameState = GameState.MainMenu;
         SceneManager.LoadScene(mainMenuScene);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 
 }
