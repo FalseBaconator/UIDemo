@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private UIManager uiManager;
     private LevelManager levelManager;
-
+    public FirstPersonController_Sam player;
     public enum GameState { MainMenu, GamePlay, Pause, Win, Lose }
 
     private GameState _gameState;
@@ -30,32 +30,65 @@ public class GameManager : MonoBehaviour
                     Time.timeScale = 1;
                     uiManager.OpenMainMenu();
                     Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.GamePlay:
                     Time.timeScale = 1;
                     uiManager.OpenGameScreen();
+                    //player = FindFirstObjectByType<FirstPersonController_Sam>();
+                    try
+                    {
+                        player.UnPause();
+                    }
+                    catch { }
                     Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Pause:
                     Time.timeScale = 0;
                     uiManager.OpenPauseScreen();
+                    //player = FindFirstObjectByType<FirstPersonController_Sam>();
+                    try
+                    {
+                        player.Pause();
+                    }catch { }
                     Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.Win:
                     Time.timeScale = 0;
                     uiManager.OpenWinScreen();
+                    //player = FindFirstObjectByType<FirstPersonController_Sam>();
+                    try
+                    {
+                        player.Pause();
+                    }
+                    catch { }
                     Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.Lose:
                     Time.timeScale = 0;
                     uiManager.OpenLoseScreen();
+                    //player = FindFirstObjectByType<FirstPersonController_Sam>();
+                    try
+                    {
+                        player.Pause();
+                    }
+                    catch { }
                     Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                     break;
             }
             _gameState = value;
         }
     }
     private GameState prevState = GameState.MainMenu;
+
+    public void SetPlayer(FirstPersonController_Sam character)
+    {
+        player = character;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -94,24 +127,30 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Win:
-
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    gameState = GameState.GamePlay;
+                }
                 break;
             case GameState.Lose:
-
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    gameState = GameState.GamePlay;
+                }
                 break;
         }
     }
 
     public void OpenGame()
     {
-        SceneManager.LoadScene(gamePlayScene);
         gameState = GameState.GamePlay;
+        SceneManager.LoadScene(gamePlayScene);
     }
 
     public void QuitToMenu()
     {
-        SceneManager.LoadScene(mainMenuScene);
         gameState = GameState.MainMenu;
+        SceneManager.LoadScene(mainMenuScene);
     }
 
 }

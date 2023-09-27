@@ -116,8 +116,9 @@ public class FirstPersonController_Sam : MonoBehaviour
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
-        defaultFOV = playerCamera.fieldOfView;        
-
+        defaultFOV = playerCamera.fieldOfView;
+        FindFirstObjectByType<GameManager>().SetPlayer(this);
+        UnPause();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -143,6 +144,16 @@ public class FirstPersonController_Sam : MonoBehaviour
     private void LateUpdate()
     {
 
+    }
+
+    public void Pause()
+    {
+        canMove = false;
+    }
+
+    public void UnPause()
+    {
+        canMove = true;
     }
 
     private void HandleMovementInput()

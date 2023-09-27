@@ -5,14 +5,14 @@ using UnityEngine;
 public class Singleton : MonoBehaviour
 {
 
-    public Singleton instance;
+    public static Singleton instance;
 
     // Start is called before the first frame update
     void Start()
     {
         if(instance != null)
         {
-            GameObject.Destroy(this);
+            GameObject.Destroy(gameObject);
         }
         else
         {
