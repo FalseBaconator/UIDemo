@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Victory
   - Danger
+  - HPText
   layers:
   - Default
   - TransparentFX
