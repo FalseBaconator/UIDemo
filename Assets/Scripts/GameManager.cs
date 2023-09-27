@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int gamePlayScene;
+    //public int gamePlayScene;
     public int mainMenuScene;
 
     public GameObject uiObject;
@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     private LevelManager levelManager;
     public FirstPersonController_Sam firstPersonSam;
-    public enum GameState { MainMenu, GamePlay, Pause, Win, Lose }
+    public enum GameState { MainMenu, LevelSelect, GamePlay, Pause, Win, Lose }
 
     private GameState _gameState;
     public GameState gameState
@@ -29,6 +29,12 @@ public class GameManager : MonoBehaviour
                 case GameState.MainMenu:
                     Time.timeScale = 1;
                     uiManager.OpenMainMenu();
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    break;
+                case GameState.LevelSelect:
+                    Time.timeScale = 1;
+                    uiManager.OpenLevelSelect();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
@@ -141,10 +147,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OpenGame()
+    public void OpenLevelScreen()
+    {
+        gameState = GameState.LevelSelect;
+    }
+
+    public void GoToLevel(int scene)
     {
         gameState = GameState.GamePlay;
-        SceneManager.LoadScene(gamePlayScene);
+        SceneManager.LoadScene(scene);
     }
 
     public void QuitToMenu()
