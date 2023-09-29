@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     private LevelManager levelManager;
     public FirstPersonController_Sam firstPersonSam;
-    public enum GameState { MainMenu, LevelSelect, GamePlay, Pause, Win, Lose }
+    public enum GameState { MainMenu, Options, LevelSelect, GamePlay, Pause, Win, Lose }
 
     private GameState _gameState;
     public GameState gameState
@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour
                     uiManager.OpenMainMenu();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
+                    break;
+                case GameState.Options:
+                    Time.timeScale = 0;
+                    uiManager.OpenOptions();
+                    Cursor.visible = true;
+                    Cursor.lockState= CursorLockMode.None;
                     break;
                 case GameState.LevelSelect:
                     Time.timeScale = 1;
@@ -110,21 +116,12 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.MainMenu:
-
                 break;
             case GameState.GamePlay:
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Pause;
                 }
-                /*if (Input.GetKeyDown(KeyCode.W))
-                {
-                    gameState = GameState.Win;
-                }
-                if (Input.GetKeyDown(KeyCode.L))
-                {
-                    gameState = GameState.Lose;
-                }*/
                 break;
             case GameState.Pause:
                 if (Input.GetKeyDown(KeyCode.Escape))
@@ -133,16 +130,8 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Win:
-                /*if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    gameState = GameState.GamePlay;
-                }*/
                 break;
             case GameState.Lose:
-                /*if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    gameState = GameState.GamePlay;
-                }*/
                 break;
         }
     }
@@ -156,6 +145,16 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.GamePlay;
         SceneManager.LoadScene(scene);
+    }
+
+    public void GoToPrevious()
+    {
+        gameState = prevState;
+    }
+
+    public void OpenOptions()
+    {
+        gameState = GameState.Options;
     }
 
     public void QuitToMenu()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public GameObject MainMenu;
+    public GameObject Options;
     public GameObject LevelSelect;
     public GameObject GamePlayCanvas;
     public GameObject PauseScreen;
@@ -14,6 +15,18 @@ public class UIManager : MonoBehaviour
     public void OpenMainMenu()
     {
         MainMenu.SetActive(true);
+        Options.SetActive(false);
+        LevelSelect.SetActive(false);
+        GamePlayCanvas.SetActive(false);
+        PauseScreen.SetActive(false);
+        WinScreen.SetActive(false);
+        LoseScreen.SetActive(false);
+    }
+
+    public void OpenOptions()
+    {
+        MainMenu.SetActive(false);
+        Options.SetActive(true);
         LevelSelect.SetActive(false);
         GamePlayCanvas.SetActive(false);
         PauseScreen.SetActive(false);
@@ -24,6 +37,7 @@ public class UIManager : MonoBehaviour
     public void OpenLevelSelect()
     {
         MainMenu.SetActive(false);
+        Options.SetActive(false);
         LevelSelect.SetActive(true);
         GamePlayCanvas.SetActive(false);
         PauseScreen.SetActive(false);
@@ -34,6 +48,7 @@ public class UIManager : MonoBehaviour
     public void OpenGameScreen()
     {
         MainMenu.SetActive(false);
+        Options.SetActive(false);
         LevelSelect.SetActive(false);
         GamePlayCanvas.SetActive(true);
         PauseScreen.SetActive(false);
@@ -44,6 +59,7 @@ public class UIManager : MonoBehaviour
     public void OpenPauseScreen()
     {
         MainMenu.SetActive(false);
+        Options.SetActive(false);
         LevelSelect.SetActive(false);
         GamePlayCanvas.SetActive(false);
         PauseScreen.SetActive(true);
@@ -54,6 +70,7 @@ public class UIManager : MonoBehaviour
     public void OpenWinScreen()
     {
         MainMenu.SetActive(false);
+        Options.SetActive(false);
         LevelSelect.SetActive(false);
         GamePlayCanvas.SetActive(false);
         PauseScreen.SetActive(false);
@@ -64,6 +81,7 @@ public class UIManager : MonoBehaviour
     public void OpenLoseScreen()
     {
         MainMenu.SetActive(false);
+        Options.SetActive(false);
         LevelSelect.SetActive(false);
         GamePlayCanvas.SetActive(false);
         PauseScreen.SetActive(false);
