@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     private LevelManager levelManager;
     public FirstPersonController_Sam firstPersonSam;
+
+    public Image fireImg;
+
     public enum GameState { MainMenu, Options, LevelSelect, GamePlay, Pause, Win, Lose }
 
     private GameState _gameState;
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
             switch (value)
             {
                 case GameState.MainMenu:
+                    fireImg.gameObject.SetActive(false);
                     Time.timeScale = 1;
                     uiManager.OpenMainMenu();
                     Cursor.visible = true;
@@ -39,6 +44,7 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState= CursorLockMode.None;
                     break;
                 case GameState.LevelSelect:
+                    fireImg.gameObject.SetActive(false);
                     Time.timeScale = 1;
                     uiManager.OpenLevelSelect();
                     Cursor.visible = true;
@@ -68,6 +74,7 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.Win:
+                    fireImg.gameObject.SetActive(false);
                     Time.timeScale = 0;
                     uiManager.OpenWinScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
@@ -80,6 +87,7 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.Lose:
+                    fireImg.gameObject.SetActive(false);
                     Time.timeScale = 0;
                     uiManager.OpenLoseScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
