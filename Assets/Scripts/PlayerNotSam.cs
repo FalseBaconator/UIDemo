@@ -21,6 +21,9 @@ public class PlayerNotSam : MonoBehaviour
     public Sprite fire1;
     public Sprite fire2;
 
+    public TextMeshProUGUI jumpText;
+    int jumps;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,7 +36,7 @@ public class PlayerNotSam : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(spawnPoint);
+        jumpText.text = "JUMPS: " + jumps;
     }
 
     private void OnTriggerStay(Collider other)
@@ -77,6 +80,11 @@ public class PlayerNotSam : MonoBehaviour
         {
             gameManager.gameState = GameManager.GameState.Lose;
         }
+    }
+
+    public void Jump()
+    {
+        jumps++;
     }
 
     private void OnTriggerEnter(Collider other)

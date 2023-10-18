@@ -110,9 +110,11 @@ public class FirstPersonController_Sam : MonoBehaviour
     private Vector2 currentInput;
 
     private float rotationX = 0;
+    private PlayerNotSam player;
 
     private void Awake()
     {
+        player = GetComponent<PlayerNotSam>();
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
@@ -189,6 +191,7 @@ public class FirstPersonController_Sam : MonoBehaviour
     {
         if (shouldJump)
         {
+            player.Jump();
             moveDirection.y = jumpForce;
         }
     }
