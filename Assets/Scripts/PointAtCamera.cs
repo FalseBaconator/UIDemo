@@ -14,6 +14,6 @@ public class PointAtCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.rotation = cam.transform.rotation;
+        transform.LookAt(transform.position + cam.transform.forward);
     }
 }
