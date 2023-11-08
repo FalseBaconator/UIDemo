@@ -8,6 +8,8 @@ TagManager:
   - Danger
   - HPText
   - FireOverlay
+  - HPSlider
+  - StaminaSlider
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,9 @@ public class PlayerNotSam : MonoBehaviour
     private GameManager gameManager;
     public int HP;
     public int MaxHP;
-    private TextMeshProUGUI HPText;
+    //private TextMeshProUGUI HPText;
+    public Slider HPSlider;
+    public Slider StaminaSlider;
     private Vector3 spawnPoint;
     public float fireDelay;
     public float animDelay;
@@ -29,14 +31,20 @@ public class PlayerNotSam : MonoBehaviour
     {
         gameManager = FindFirstObjectByType<GameManager>();
         fireImg = gameManager.fireImg;
-        HPText = GameObject.FindGameObjectWithTag("HPText").GetComponent<TextMeshProUGUI>();
-        HPText.text = "HP: " + HP + "/" + MaxHP;
+        //HPText = GameObject.FindGameObjectWithTag("HPText").GetComponent<TextMeshProUGUI>();
+        //HPText.text = "HP: " + HP + "/" + MaxHP;
+        HPSlider = GameObject.FindGameObjectWithTag("HPSlider").GetComponent<Slider>();
+        HPSlider.maxValue = MaxHP;
         spawnPoint = transform.position;
     }
 
     private void Update()
     {
         jumpText.text = "JUMPS: " + jumps;
+        if(HPSlider.value != HP)
+        {
+            HPSlider.value = HP;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -75,7 +83,7 @@ public class PlayerNotSam : MonoBehaviour
     void TakeDmg()
     {
         HP--;
-        HPText.text = "HP: " + HP + "/" + MaxHP;
+        //HPText.text = "HP: " + HP + "/" + MaxHP;
         if (HP <= 0)
         {
             gameManager.gameState = GameManager.GameState.Lose;
