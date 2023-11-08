@@ -629,8 +629,8 @@ MonoBehaviour:
   jumpKey: 32
   crouchKey: 306
   zoomKey: 324
-  walkSpeed: 4
-  runSpeed: 6
+  walkSpeed: 3
+  runSpeed: 7
   crouchSpeed: 2.5
   slopeSpeeed: 12
   lookSpeedX: 2
@@ -762,8 +762,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   MaxHP: 10
+  stamina: 2.5
+  MaxStamina: 2.5
+  canSprint: 0
+  isSprinting: 0
   HPSlider: {fileID: 0}
-  StaminaSlider: {fileID: 0}
+  staminaSlider: {fileID: 0}
   fireDelay: 0.5
   animDelay: 0.5
   fire1: {fileID: -143036285, guid: 0dbdbe7de5b54bc41bdca47a6f5fb240, type: 3}

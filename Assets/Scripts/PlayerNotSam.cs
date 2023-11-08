@@ -10,9 +10,13 @@ public class PlayerNotSam : MonoBehaviour
     private GameManager gameManager;
     public int HP;
     public int MaxHP;
+    public float stamina;
+    public float MaxStamina;
+    public bool canSprint;
+    public bool isSprinting;
     //private TextMeshProUGUI HPText;
     public Slider HPSlider;
-    public Slider StaminaSlider;
+    public Slider staminaSlider;
     private Vector3 spawnPoint;
     public float fireDelay;
     public float animDelay;
@@ -26,6 +30,8 @@ public class PlayerNotSam : MonoBehaviour
     public TextMeshProUGUI jumpText;
     int jumps;
 
+    FirstPersonController_Sam playerSam;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -35,6 +41,10 @@ public class PlayerNotSam : MonoBehaviour
         //HPText.text = "HP: " + HP + "/" + MaxHP;
         HPSlider = GameObject.FindGameObjectWithTag("HPSlider").GetComponent<Slider>();
         HPSlider.maxValue = MaxHP;
+        staminaSlider = GameObject.FindGameObjectWithTag("StaminaSlider").GetComponent<Slider>();
+        staminaSlider.maxValue = MaxStamina;
+        playerSam = GetComponent<FirstPersonController_Sam>();
+        canSprint = true;
         spawnPoint = transform.position;
     }
 
@@ -45,6 +55,46 @@ public class PlayerNotSam : MonoBehaviour
         {
             HPSlider.value = HP;
         }
+
+        if (Input.GetKey(KeyCode.LeftShift) && isSprinting == false)
+        {
+            if (canSprint) isSprinting = true;
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isSprinting = false;
+        }
+
+        if (isSprinting)
+        {
+            stamina -= Time.deltaTime;
+            if(stamina <= 0)
+            {
+                stamina = 0;
+                canSprint = false;
+                //playerSam.canZoom = false;
+                playerSam.StopSprint();
+                isSprinting = false;
+            }
+        }
+        if (!isSprinting)
+        {
+            if(stamina < MaxStamina)
+            {
+                stamina += Time.deltaTime;
+            }else if (!canSprint)
+            {
+                canSprint = true;
+                //playerSam.canZoom = true;
+            }
+            if(stamina > MaxStamina)
+            {
+                stamina = MaxStamina;
+            }
+        }
+
+        staminaSlider.value = stamina;
+
     }
 
     private void OnTriggerStay(Collider other)

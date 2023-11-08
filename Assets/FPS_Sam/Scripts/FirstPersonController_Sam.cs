@@ -168,7 +168,7 @@ public class FirstPersonController_Sam : MonoBehaviour
         currentInput *= (currentInput.x != 0.0f && currentInput.y != 0.0f) ? 0.7071f : 1.0f;
 
         // Sets the required speed multiplier
-        currentInput *= (isCrouching ? crouchSpeed : isRunning ? runSpeed : walkSpeed);
+        currentInput *= (isCrouching ? crouchSpeed : isRunning && player.canSprint? runSpeed : walkSpeed);
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
@@ -212,7 +212,7 @@ public class FirstPersonController_Sam : MonoBehaviour
 
         if (Mathf.Abs(moveDirection.x) > 0.1f || Mathf.Abs(moveDirection.z) > 0.1f)
         {
-            timer += Time.deltaTime * (isCrouching ? crouchBobSpeed : isRunning ? runBobSpeed : walkBobSpeed);
+            timer += Time.deltaTime * (isCrouching ? crouchBobSpeed : isRunning && player.canSprint ? runBobSpeed : walkBobSpeed);
             playerCamera.transform.localPosition = new Vector3(
                 playerCamera.transform.localPosition.x,
                 defaultYPos + Mathf.Sin(timer) * (isCrouching ? crouchBobAmount : isRunning ? runBobAmount : walkBobAmount),
@@ -242,10 +242,11 @@ public class FirstPersonController_Sam : MonoBehaviour
             zoomRoutine = StartCoroutine(ToggleZoom(false));
         }
     }
-
-
-
     
+    public void StopSprint()
+    {
+
+    }
 
     private void ApplyFinalMovement()
     {
