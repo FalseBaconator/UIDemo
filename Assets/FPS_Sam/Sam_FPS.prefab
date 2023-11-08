@@ -760,9 +760,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b6fb1366dfe0b4895f2ff3954fe403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 5
-  MaxHP: 5
-  fireDelay: 1
+  HP: 10
+  MaxHP: 10
+  HPSlider: {fileID: 0}
+  StaminaSlider: {fileID: 0}
+  fireDelay: 0.5
   animDelay: 0.5
   fire1: {fileID: -143036285, guid: 0dbdbe7de5b54bc41bdca47a6f5fb240, type: 3}
   fire2: {fileID: 572710501, guid: 0dbdbe7de5b54bc41bdca47a6f5fb240, type: 3}
