@@ -29,6 +29,7 @@ public class PlayerNotSam : MonoBehaviour
 
     public TextMeshProUGUI jumpText;
     int jumps;
+    AudioManager audioManager;
 
     FirstPersonController_Sam playerSam;
 
@@ -46,6 +47,7 @@ public class PlayerNotSam : MonoBehaviour
         playerSam = GetComponent<FirstPersonController_Sam>();
         canSprint = true;
         spawnPoint = transform.position;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -143,6 +145,7 @@ public class PlayerNotSam : MonoBehaviour
     public void Jump()
     {
         jumps++;
+        audioManager.PlayJump();
     }
 
     private void OnTriggerEnter(Collider other)
