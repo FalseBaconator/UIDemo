@@ -22,7 +22,9 @@ public class PlayerNotSam : MonoBehaviour
     public float animDelay;
     private float currentDelay;
     private float currentAnimDelay;
+    private GameObject fireParent;
     private Image fireImg;
+    private Image fireTimeIndicator;
     private int fireIndex = 1;
     public Sprite fire1;
     public Sprite fire2;
@@ -37,7 +39,9 @@ public class PlayerNotSam : MonoBehaviour
     void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        fireParent = gameManager.fireParent;
         fireImg = gameManager.fireImg;
+        fireTimeIndicator = gameManager.fireTimeIndicator;
         //HPText = GameObject.FindGameObjectWithTag("HPText").GetComponent<TextMeshProUGUI>();
         //HPText.text = "HP: " + HP + "/" + MaxHP;
         HPSlider = GameObject.FindGameObjectWithTag("HPSlider").GetComponent<Slider>();
@@ -108,6 +112,7 @@ public class PlayerNotSam : MonoBehaviour
             case "Danger":
                 currentDelay -= Time.deltaTime;
                 currentAnimDelay -= Time.deltaTime;
+                fireTimeIndicator.fillAmount = currentDelay / fireDelay;
                 if (currentDelay <= 0)
                 {
                     TakeDmg();
@@ -159,7 +164,7 @@ public class PlayerNotSam : MonoBehaviour
                 TakeDmg();
                 currentDelay = fireDelay;
                 currentAnimDelay = animDelay;
-                fireImg.gameObject.SetActive(true);
+                fireParent.SetActive(true);
                 fireIndex = 1;
                 fireImg.sprite = fire1;
                 break;
@@ -173,7 +178,7 @@ public class PlayerNotSam : MonoBehaviour
             case "Victory":
                 break;
             case "Danger":
-                fireImg.gameObject.SetActive(false);
+                fireParent.SetActive(false);
                 break;
         }
     }

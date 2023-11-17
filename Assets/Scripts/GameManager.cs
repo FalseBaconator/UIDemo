@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
 
     public AudioManager audioManager;
 
+    public GameObject fireParent;
     public Image fireImg;
+    public Image fireTimeIndicator;
 
     public enum GameState { MainMenu, Options, LevelSelect, GamePlay, Pause, Win, Lose }
 
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
             switch (value)
             {
                 case GameState.MainMenu:
-                    fireImg.gameObject.SetActive(false);
+                    fireParent.SetActive(false);
                     Time.timeScale = 1;
                     uiManager.OpenMainMenu();
                     Cursor.visible = true;
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState= CursorLockMode.None;
                     break;
                 case GameState.LevelSelect:
-                    fireImg.gameObject.SetActive(false);
+                    fireParent.SetActive(false);
                     Time.timeScale = 1;
                     uiManager.OpenLevelSelect();
                     Cursor.visible = true;
@@ -81,7 +83,7 @@ public class GameManager : MonoBehaviour
                     audioManager.PauseAllAudio();
                     break;
                 case GameState.Win:
-                    fireImg.gameObject.SetActive(false);
+                    fireParent.SetActive(false);
                     Time.timeScale = 0;
                     uiManager.OpenWinScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
@@ -94,7 +96,7 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.Lose:
-                    fireImg.gameObject.SetActive(false);
+                    fireParent.SetActive(false);
                     Time.timeScale = 0;
                     uiManager.OpenLoseScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
