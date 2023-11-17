@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private LevelManager levelManager;
     public FirstPersonController_Sam firstPersonSam;
 
+    public AudioManager audioManager;
+
     public Image fireImg;
 
     public enum GameState { MainMenu, Options, LevelSelect, GamePlay, Pause, Win, Lose }
@@ -27,6 +29,10 @@ public class GameManager : MonoBehaviour
         get => _gameState;
         set
         {
+            if (_gameState == GameState.Pause)
+            {
+                audioManager.UnpauseAllAudio();
+            }
             prevState = _gameState;
             switch (value)
             {
@@ -72,6 +78,7 @@ public class GameManager : MonoBehaviour
                     }catch { }
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
+                    audioManager.PauseAllAudio();
                     break;
                 case GameState.Win:
                     fireImg.gameObject.SetActive(false);

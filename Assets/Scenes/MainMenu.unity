@@ -3237,6 +3237,7 @@ MonoBehaviour:
   uiObject: {fileID: 766131272}
   levelObject: {fileID: 25049855}
   firstPersonSam: {fileID: 0}
+  audioManager: {fileID: 1593274872}
   fireImg: {fileID: 1597917672}
 --- !u!1 &1161074081
 GameObject:
