@@ -23,7 +23,9 @@ public class GameManager : MonoBehaviour
     public Image fireImg;
     public Image fireTimeIndicator;
 
-    public enum GameState { MainMenu, Options, LevelSelect, GamePlay, Pause, Win, Lose }
+    public int currentLevel;
+
+    public enum GameState { MainMenu, Options, LevelSelect, GamePlay, Pause, Win, Lose, Sure }
 
     private GameState _gameState;
     public GameState gameState
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
                 audioManager.UnpauseAllAudio();
             }
             prevState = _gameState;
+            if(_gameState != GameState.Pause && _gameState != GameState.Options && _gameState != GameState.Sure) prevNotPauseState = _gameState;
             switch (value)
             {
                 case GameState.MainMenu:
@@ -52,6 +55,7 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState= CursorLockMode.None;
                     break;
                 case GameState.LevelSelect:
+                    levelManager.Refresh();
                     fireParent.SetActive(false);
                     Time.timeScale = 1;
                     uiManager.OpenLevelSelect();
@@ -83,6 +87,7 @@ public class GameManager : MonoBehaviour
                     audioManager.PauseAllAudio();
                     break;
                 case GameState.Win:
+                    levelManager.Win(currentLevel);
                     fireParent.SetActive(false);
                     Time.timeScale = 0;
                     uiManager.OpenWinScreen();
@@ -108,11 +113,19 @@ public class GameManager : MonoBehaviour
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
+                case GameState.Sure:
+                    fireParent.SetActive(false);
+                    Time.timeScale = 0;
+                    uiManager.OpenSureScreen();
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    break;
             }
             _gameState = value;
         }
     }
     private GameState prevState = GameState.MainMenu;
+    private GameState prevNotPauseState = GameState.MainMenu;
 
     public void SetPlayer(FirstPersonController_Sam character)
     {
@@ -160,18 +173,24 @@ public class GameManager : MonoBehaviour
 
     public void GoToLevel(int scene)
     {
+        currentLevel = scene;
         gameState = GameState.GamePlay;
         SceneManager.LoadScene(scene);
     }
 
-    public void GoToPrevious()
+    public void GoToPrevNotPause()
     {
-        gameState = prevState;
+        gameState = prevNotPauseState;
     }
 
     public void OpenOptions()
     {
         gameState = GameState.Options;
+    }
+
+    public void GoToSure()
+    {
+        gameState = GameState.Sure;
     }
 
     public void QuitToMenu()

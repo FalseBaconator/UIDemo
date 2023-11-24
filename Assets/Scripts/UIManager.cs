@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject PauseScreen;
     public GameObject WinScreen;
     public GameObject LoseScreen;
+    public GameObject SureScreen;
 
     public void OpenMainMenu()
     {
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
         PauseScreen.SetActive(false);
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
+        SureScreen.SetActive(false);
     }
 
     public void OpenOptions()
@@ -32,6 +34,7 @@ public class UIManager : MonoBehaviour
         PauseScreen.SetActive(false);
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
+        SureScreen.SetActive(false);
     }
 
     public void OpenLevelSelect()
@@ -43,6 +46,7 @@ public class UIManager : MonoBehaviour
         PauseScreen.SetActive(false);
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
+        SureScreen.SetActive(false);
     }
 
     public void OpenGameScreen()
@@ -54,6 +58,7 @@ public class UIManager : MonoBehaviour
         PauseScreen.SetActive(false);
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
+        SureScreen.SetActive(false);
     }
 
     public void OpenPauseScreen()
@@ -65,6 +70,7 @@ public class UIManager : MonoBehaviour
         PauseScreen.SetActive(true);
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
+        SureScreen.SetActive(false);
     }
 
     public void OpenWinScreen()
@@ -76,6 +82,7 @@ public class UIManager : MonoBehaviour
         PauseScreen.SetActive(false);
         WinScreen.SetActive(true);
         LoseScreen.SetActive(false);
+        SureScreen.SetActive(false);
     }
 
     public void OpenLoseScreen()
@@ -87,6 +94,19 @@ public class UIManager : MonoBehaviour
         PauseScreen.SetActive(false);
         WinScreen.SetActive(false);
         LoseScreen.SetActive(true);
+        SureScreen.SetActive(false);
+    }
+
+    public void OpenSureScreen()
+    {
+        MainMenu.SetActive(false);
+        Options.SetActive(false);
+        LevelSelect.SetActive(false);
+        GamePlayCanvas.SetActive(false);
+        PauseScreen.SetActive(false);
+        WinScreen.SetActive(false);
+        LoseScreen.SetActive(false);
+        SureScreen.SetActive(true);
     }
 
 }
