@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
 
     public void Refresh()
     {
+        wins = PlayerPrefs.GetInt("wins", 0);
         for (int i = 0; i < levelButtons.Length; i++)
         {
             if (i <= wins) levelButtons[i].interactable = true;
