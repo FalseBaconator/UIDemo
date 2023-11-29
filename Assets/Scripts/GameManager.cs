@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.Options:
-                    Time.timeScale = 0;
+                    Time.timeScale = 1;
                     uiManager.OpenOptions();
                     Cursor.visible = true;
                     Cursor.lockState= CursorLockMode.None;
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Pause:
-                    Time.timeScale = 0;
+                    Time.timeScale = 1;
                     uiManager.OpenPauseScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
                 case GameState.Win:
                     levelManager.Win(currentLevel);
                     fireParent.SetActive(false);
-                    Time.timeScale = 0;
+                    Time.timeScale = 1;
                     uiManager.OpenWinScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case GameState.Lose:
                     fireParent.SetActive(false);
-                    Time.timeScale = 0;
+                    Time.timeScale = 1;
                     uiManager.OpenLoseScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case GameState.Sure:
                     fireParent.SetActive(false);
-                    Time.timeScale = 0;
+                    Time.timeScale = 1;
                     uiManager.OpenSureScreen();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
