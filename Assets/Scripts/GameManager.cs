@@ -43,13 +43,11 @@ public class GameManager : MonoBehaviour
             {
                 case GameState.MainMenu:
                     fireParent.SetActive(false);
-                    Time.timeScale = 1;
                     uiManager.OpenMainMenu();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.Options:
-                    Time.timeScale = 1;
                     uiManager.OpenOptions();
                     Cursor.visible = true;
                     Cursor.lockState= CursorLockMode.None;
@@ -57,7 +55,6 @@ public class GameManager : MonoBehaviour
                 case GameState.LevelSelect:
                     levelManager.Refresh();
                     fireParent.SetActive(false);
-                    Time.timeScale = 1;
                     uiManager.OpenLevelSelect();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
@@ -75,9 +72,8 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Pause:
-                    Time.timeScale = 1;
+                    Time.timeScale = 0;
                     uiManager.OpenPauseScreen();
-                    //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
                     {
                         firstPersonSam.Pause();
@@ -87,9 +83,9 @@ public class GameManager : MonoBehaviour
                     audioManager.PauseAllAudio();
                     break;
                 case GameState.Win:
+                    Time.timeScale = 0;
                     levelManager.Win(currentLevel);
                     fireParent.SetActive(false);
-                    Time.timeScale = 1;
                     uiManager.OpenWinScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
@@ -101,8 +97,8 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     break;
                 case GameState.Lose:
+                    Time.timeScale = 0;
                     fireParent.SetActive(false);
-                    Time.timeScale = 1;
                     uiManager.OpenLoseScreen();
                     //player = FindFirstObjectByType<FirstPersonController_Sam>();
                     try
@@ -115,7 +111,6 @@ public class GameManager : MonoBehaviour
                     break;
                 case GameState.Sure:
                     fireParent.SetActive(false);
-                    Time.timeScale = 1;
                     uiManager.OpenSureScreen();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
